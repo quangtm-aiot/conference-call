@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import { ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { Reflector } from "@nestjs/core";
 import { WinstonModule } from "nest-winston";
@@ -16,6 +17,14 @@ async function bootstrap() {
   });
 
   const reflector = app.get(Reflector);
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
 
   app.useGlobalInterceptors(new TransformInterceptor(reflector));
 
