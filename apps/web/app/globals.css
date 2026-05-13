@@ -1,13 +1,13 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #f5efe2;
+  --surface: rgba(255, 251, 245, 0.78);
+  --surface-strong: #fffaf2;
+  --foreground: #1f1c18;
+  --muted: #655d52;
+  --border: rgba(82, 59, 31, 0.15);
+  --accent: #e85d3f;
+  --accent-strong: #17313e;
+  --accent-soft: #ffd7b8;
 }
 
 html,
@@ -16,9 +16,17 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   color: var(--foreground);
-  background: var(--background);
+  background:
+    radial-gradient(circle at top left, rgba(255, 205, 156, 0.8), transparent 28%),
+    radial-gradient(circle at top right, rgba(23, 49, 62, 0.18), transparent 32%),
+    linear-gradient(180deg, #fff8ef 0%, var(--background) 52%, #efe5d5 100%);
+  font-family: var(--font-geist-sans), sans-serif;
 }
 
 * {
@@ -32,19 +40,54 @@ a {
   text-decoration: none;
 }
 
-.imgDark {
-  display: none;
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.page-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.glass-panel {
+  background: var(--surface);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 70px rgba(30, 25, 19, 0.08);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 250, 242, 0.72);
+  border: 1px solid rgba(23, 49, 62, 0.08);
+  color: var(--accent-strong);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@keyframes float-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
   }
 
-  .imgLight {
-    display: none;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .imgDark {
-    display: unset;
+}
+
+@media (max-width: 720px) {
+  .page-shell {
+    width: min(100% - 20px, 1180px);
   }
 }

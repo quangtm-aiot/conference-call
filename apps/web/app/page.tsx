@@ -1,102 +1,207 @@
-import Image, { type ImageProps } from "next/image";
-import { Button } from "@repo/ui/button";
-import styles from "./page.module.css";
-
-type Props = Omit<ImageProps, "src"> & {
-  srcLight: string;
-  srcDark: string;
-};
-
-const ThemeImage = (props: Props) => {
-  const { srcLight, srcDark, ...rest } = props;
-
-  return (
-    <>
-      <Image {...rest} src={srcLight} className="imgLight" />
-      <Image {...rest} src={srcDark} className="imgDark" />
-    </>
-  );
-};
-
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <ThemeImage
-          className={styles.logo}
-          srcLight="turborepo-dark.svg"
-          srcDark="turborepo-light.svg"
-          alt="Turborepo logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>apps/web/app/page.tsx</code>
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const pillars = [
+    {
+      title: "LiveKit media plane",
+      body: "Audio/video realtime cho nhieu participant, tach biet khoi caption pipeline de giam do phuc tap khi demo MVP.",
+    },
+    {
+      title: "NestJS caption gateway",
+      body: "Nhan transcript qua WebSocket, fan-out ban dich theo ngon ngu tung listener, va dong bo room state qua Redis.",
+    },
+    {
+      title: "Next.js meeting UX",
+      body: "UI phong hop, overlay caption, language selector va transcript history duoc to chuc quanh App Router.",
+    },
+  ];
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new/clone?demo-description=Learn+to+implement+a+monorepo+with+a+two+Next.js+sites+that+has+installed+three+local+packages.&demo-image=%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F4K8ZISWAzJ8X1504ca0zmC%2F0b21a1c6246add355e55816278ef54bc%2FBasic.png&demo-title=Monorepo+with+Turborepo&demo-url=https%3A%2F%2Fexamples-basic-web.vercel.sh%2F&from=templates&project-name=Monorepo+with+Turborepo&repository-name=monorepo-turborepo&repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fturborepo%2Ftree%2Fmain%2Fexamples%2Fbasic&root-directory=apps%2Fdocs&skippable-integrations=1&teamSlug=vercel&utm_source=create-turbo"
-            target="_blank"
-            rel="noopener noreferrer"
+  const roadmap = [
+    "Foundation: auth, tao room, join room, WebSocket gateway, LiveKit token",
+    "Core pipeline: Web Speech API, translation fan-out, caption history, language map",
+    "Polish for demo: export transcript, indicator speaker, browser fallback, deploy staging",
+  ];
+
+  return (
+    <main
+      style={{
+        padding: "28px 0 72px",
+      }}
+    >
+      <section
+        className="page-shell"
+        style={{
+          display: "grid",
+          gap: "24px",
+          animation: "float-in 0.6s ease-out both",
+        }}
+      >
+        <div
+          className="glass-panel"
+          style={{
+            padding: "24px",
+            borderRadius: "28px",
+            display: "flex",
+            justifyContent: "space-between",
+            gap: "16px",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          <span className="eyebrow">Conference Call MVP</span>
+          <div
+            style={{
+              display: "flex",
+              gap: "12px",
+              flexWrap: "wrap",
+              color: "var(--muted)",
+              fontSize: "14px",
+            }}
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://turborepo.dev/docs?utm_source"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+            <a href="/rooms/new">Create room</a>
+            <a href="/rooms/demo-room">Open demo room</a>
+            <a href="/dashboard">Transcript history</a>
+          </div>
         </div>
-        <Button appName="web" className={styles.secondary}>
-          Open alert
-        </Button>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com/templates?search=turborepo&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        <div
+          style={{
+            display: "grid",
+            gap: "24px",
+            gridTemplateColumns: "minmax(0, 1.45fr) minmax(320px, 0.85fr)",
+          }}
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://turborepo.dev?utm_source=create-turbo"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to turborepo.dev →
-        </a>
-      </footer>
-    </div>
+          <div
+            className="glass-panel"
+            style={{
+              padding: "40px",
+              borderRadius: "36px",
+              minHeight: "520px",
+              display: "grid",
+              alignContent: "space-between",
+              gap: "28px",
+            }}
+          >
+            <div style={{ display: "grid", gap: "18px" }}>
+              <span className="eyebrow">Real-time translated captions</span>
+              <h1
+                style={{
+                  fontSize: "clamp(48px, 9vw, 104px)",
+                  lineHeight: 0.94,
+                  letterSpacing: "-0.06em",
+                  maxWidth: "9ch",
+                }}
+              >
+                One room.
+                <br />
+                Many languages.
+              </h1>
+              <p
+                style={{
+                  maxWidth: "56ch",
+                  color: "var(--muted)",
+                  fontSize: "18px",
+                  lineHeight: 1.7,
+                }}
+              >
+                Speaker noi ngon ngu tu nhien, browser xu ly speech-to-text,
+                NestJS dich caption sang nhieu ngon ngu, va moi listener nhan
+                duoc overlay dung voi language preference cua ho.
+              </p>
+            </div>
+
+            <div
+              style={{
+                display: "grid",
+                gap: "14px",
+                gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+              }}
+            >
+              <a
+                href="/rooms/new"
+                style={{
+                  padding: "18px 20px",
+                  borderRadius: "18px",
+                  background: "var(--accent)",
+                  color: "#fff9f2",
+                  fontWeight: 700,
+                  textAlign: "center",
+                }}
+              >
+                Start a meeting
+              </a>
+              <a
+                href="/landing"
+                style={{
+                  padding: "18px 20px",
+                  borderRadius: "18px",
+                  background: "var(--accent-soft)",
+                  color: "var(--accent-strong)",
+                  fontWeight: 700,
+                  textAlign: "center",
+                }}
+              >
+                Product overview
+              </a>
+            </div>
+          </div>
+
+          <div style={{ display: "grid", gap: "24px" }}>
+            <div
+              className="glass-panel"
+              style={{
+                padding: "28px",
+                borderRadius: "28px",
+                display: "grid",
+                gap: "18px",
+              }}
+            >
+              <h2 style={{ fontSize: "22px" }}>System pillars</h2>
+              {pillars.map((pillar) => (
+                <article
+                  key={pillar.title}
+                  style={{
+                    padding: "18px",
+                    borderRadius: "20px",
+                    background: "var(--surface-strong)",
+                    border: "1px solid var(--border)",
+                    display: "grid",
+                    gap: "10px",
+                  }}
+                >
+                  <h3 style={{ fontSize: "18px" }}>{pillar.title}</h3>
+                  <p style={{ color: "var(--muted)", lineHeight: 1.6 }}>
+                    {pillar.body}
+                  </p>
+                </article>
+              ))}
+            </div>
+
+            <div
+              className="glass-panel"
+              style={{
+                padding: "28px",
+                borderRadius: "28px",
+                display: "grid",
+                gap: "14px",
+              }}
+            >
+              <h2 style={{ fontSize: "22px" }}>MVP roadmap</h2>
+              <ul
+                style={{
+                  display: "grid",
+                  gap: "12px",
+                  color: "var(--muted)",
+                  paddingLeft: "18px",
+                  lineHeight: 1.6,
+                }}
+              >
+                {roadmap.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
